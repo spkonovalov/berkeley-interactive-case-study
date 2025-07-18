@@ -25,6 +25,12 @@
     input[type="range"] {
       width: 100%;
     }
+    input[name$="_current"]::-webkit-slider-thumb {
+      background: #007bff;
+    }
+    input[name$="_desired"]::-webkit-slider-thumb {
+      background: #28a745;
+    }
     .range-values {
       display: flex;
       justify-content: space-between;
@@ -117,4 +123,3 @@
   </script>
 </body>
 </html>
-
