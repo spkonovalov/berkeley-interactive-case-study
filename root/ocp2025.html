@@ -25,6 +25,12 @@
     input[type="range"] {
       width: 100%;
     }
+    .range-values {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #777;
+    }
     .submit-button {
       margin-top: 2rem;
       padding: 0.75rem 1.5rem;
@@ -37,16 +43,15 @@
   </style>
 </head>
 <body>
-  <h1>Опрос по Корпоративной Культуре (OCP) – Полная Версия</h1>
+  <h1>Опрос по Корпоративной Культуре (OCP)</h1>
   <p>
-    Для каждого утверждения оцените, насколько оно соответствует <strong>текущей культуре</strong> вашей компании и насколько оно <strong>важно для будущей культуры</strong> с точки зрения достижения целей.<br>
+    Оцените каждое утверждение дважды: насколько оно <strong>соответствует текущей культуре</strong> вашей компании и насколько оно <strong>важно для будущей культуры</strong>.<br>
     <strong>1 = Совершенно не соответствует | 7 = Полностью соответствует</strong>
   </p>
 
   <form id="ocpForm">
-    <label for="name">Ваше имя (опционально):</label>
+    <label for="name">Ваше имя (необязательно):</label>
     <input type="text" name="respondent" placeholder="Иван Иванов">
-
     <div id="questions"></div>
     <button type="submit" class="submit-button">Отправить</button>
   </form>
@@ -78,13 +83,15 @@
           <label>${index}. ${q}</label>
           <span class="slider-label">Текущая культура</span>
           <input type="range" name="q${index}_current" min="1" max="7">
+          <div class="range-values"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
           <span class="slider-label">Желаемая культура</span>
           <input type="range" name="q${index}_desired" min="1" max="7">
+          <div class="range-values"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
         </div>
       `;
     });
 
-    document.getElementById("ocpForm").addEventListener("submit", function (e) {
+    document.getElementById("ocpForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const data = {};
@@ -92,17 +99,20 @@
         data[key] = value;
       });
 
-      fetch("https://script.google.com/macros/s/AKfycbzpHIbd7iaXtCkK-DrpHWDqognKAeYE_8AHYoSDXc-IZ0rhS9fLySPC939TAwlwg7CqlA/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-      alert("Спасибо! Ваши ответы отправлены.");
-      e.target.reset();
+      try {
+        await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        alert("Спасибо! Ваши ответы отправлены.");
+        e.target.reset();
+      } catch (error) {
+        alert("Произошла ошибка при отправке данных.");
+      }
     });
   </script>
 </body>
