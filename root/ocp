@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizational Culture Survey</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 1.5rem;
+      font-weight: bold;
+    }
+    .question {
+      margin-bottom: 1rem;
+    }
+    .slider-label {
+      margin-top: 0.25rem;
+      font-weight: normal;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .submit-button {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Organizational Culture Profile (OCP) Survey</h1>
+  <p>
+    For each statement, rate your agreement about how well it describes your organization's CURRENT culture and how important it is for the DESIRED culture.
+    <br />
+    <strong>1 = Not at all | 7 = Very much</strong>
+  </p>
+
+  <form id="ocpForm">
+    <div class="question">
+      <label>Encourages initiative and new ideas</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q1_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q1_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Sets and pursues ambitious, measurable goals</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q2_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q2_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Focuses on attention to detail and high quality</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q3_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q3_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Promotes collaboration and teamwork</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q4_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q4_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Upholds integrity and high ethical standards</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q5_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q5_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Focuses on customer needs and market orientation</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q6_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q6_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Shares information openly and discourages politics</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q7_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q7_desired" min="1" max="7" />
+    </div>
+
+    <div class="question">
+      <label>Invests in people development and support</label>
+      <span class="slider-label">Current Culture</span>
+      <input type="range" name="q8_current" min="1" max="7" />
+      <span class="slider-label">Desired Culture</span>
+      <input type="range" name="q8_desired" min="1" max="7" />
+    </div>
+
+    <button type="submit" class="submit-button">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById("ocpForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Thank you for submitting the survey. Your responses have been recorded.");
+    });
+  </script>
+</body>
+</html>
