@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Опрос: Культура Компании (OCP)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    label {
+      display: block;
+      margin-top: 1.5rem;
+      font-weight: bold;
+    }
+    .question {
+      margin-bottom: 1.2rem;
+    }
+    .slider-label {
+      margin-top: 0.25rem;
+      font-weight: normal;
+    }
+    input[type="range"] {
+      width: 100%;
+    }
+    .submit-button {
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Опрос по Корпоративной Культуре (OCP) – Полная Версия</h1>
+  <p>
+    Для каждого утверждения оцените, насколько оно соответствует <strong>текущей культуре</strong> вашей компании и насколько оно <strong>важно для будущей культуры</strong> с точки зрения достижения целей.<br>
+    <strong>1 = Совершенно не соответствует | 7 = Полностью соответствует</strong>
+  </p>
+
+  <form id="ocpForm">
+    <label for="name">Ваше имя (опционально):</label>
+    <input type="text" name="respondent" placeholder="Иван Иванов">
+
+    <div id="questions"></div>
+    <button type="submit" class="submit-button">Отправить</button>
+  </form>
+
+  <script>
+    const questions = [
+      "Ориентированность на результат", "Высокие ожидания от производительности", "Лёгкость в общении",
+      "Стремление к достижениям", "Спокойствие", "Ориентация на действия", "Внимание к деталям",
+      "Точность", "Качество как приоритет", "Аналитический подход", "Ориентация на клиента",
+      "Умение слушать клиента", "Ориентация на рынок", "Нравственные принципы", "Высокие этические стандарты",
+      "Честность", "Открытое распространение информации", "Прозрачность личных целей",
+      "Поставить цели организации выше личных", "Готовность к риску", "Осторожность", "Предсказуемость",
+      "Готовность к экспериментам", "Инновационность", "Быстрота", "Умение воспользоваться возможностями",
+      "Инициативность", "Выполнение KPI", "Избегание конфликтов", "Совместная работа",
+      "Командная работа", "Агрессивность", "Высокий уровень конфликтов", "Кооперативность",
+      "Обучение на ошибках", "Поддержка коллег", "Соревновательность", "Ориентация на людей",
+      "Уважение к личности", "Инвестирование в развитие сотрудников", "Поддержка карьерных целей",
+      "Ответственность как у владельца", "Личная ответственность", "Знания важнее связей",
+      "Гарантии занятости", "Минимум ограничений и правил", "Следование правилам",
+      "Прямое разрешение конфликтов", "Решительность", "Толерантность", "Профессиональный рост",
+      "Срочность", "Стабильность"
+    ];
+
+    const container = document.getElementById("questions");
+    questions.forEach((q, i) => {
+      const index = i + 1;
+      container.innerHTML += `
+        <div class="question">
+          <label>${index}. ${q}</label>
+          <span class="slider-label">Текущая культура</span>
+          <input type="range" name="q${index}_current" min="1" max="7">
+          <span class="slider-label">Желаемая культура</span>
+          <input type="range" name="q${index}_desired" min="1" max="7">
+        </div>
+      `;
+    });
+
+    document.getElementById("ocpForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      alert("Спасибо! Ваши ответы отправлены.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
